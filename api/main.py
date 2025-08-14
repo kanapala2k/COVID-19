@@ -1,8 +1,8 @@
 from fastapi import FastAPI
-from elastic_search import main
+from elastic_search import elastic
 
 app = FastAPI()
-es = main.es
+es = elastic.es
 
 from routers import lookup, search
 app.include_router(lookup.router)
