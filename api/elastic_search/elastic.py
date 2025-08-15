@@ -6,6 +6,32 @@ es = Elasticsearch(
     api_key="WXY3dHBKZ0J0aFZlM1hLRWp2V206cmlmR1Q0ODlkOGNCU1BVaTBsUFpLdw=="
 )
 
+def multiMatchSearch(query: str):
+    retriever_object = {
+        "standard": {
+            "query": {
+                "multi_match": {
+                    "query": query,
+                    "fields": [
+                        "title",
+                        "abstract"
+                    ]
+                }
+            }
+        }
+    }
+    search_response = es.search(
+        index="covid_19",
+        retriever=retriever_object
+    )
+    return [
+        {
+            "title": hit["_source"]["title"],
+            "abstract": hit["_source"]["title"]
+        }
+        for hit in search_response["hits"]["hits"]
+    ]
+
 # Test connection
 if es.ping():
     print("Connected to Elasticsearch!")
