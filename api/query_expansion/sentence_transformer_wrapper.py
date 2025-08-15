@@ -6,9 +6,6 @@ def expanded_query (query:str) -> str:
     # Load a pre-trained Sentence Transformer model
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
-    # Original query
-    query = "machine learning algorithms"
-
     # Candidate expansion terms (can be extracted from a corpus)
     candidate_terms = ["deep learning", "neural networks", "artificial intelligence", "data science", "supervised learning"]
 
