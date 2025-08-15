@@ -11,3 +11,23 @@ if es.ping():
     print("Connected to Elasticsearch!")
 else:
     print("Connection failed.")
+
+def multiMatchSearch(query: str):
+    retriever_object = {
+        "standard": {
+            "query": {
+                "multi_match": {
+                    "query": query,
+                    "fields": [
+                        "title",
+                        "abstract"
+                    ]
+                }
+            }
+        }
+    }
+    search_response = es.search(
+        index="covid_19",
+        retriever=retriever_object
+    )
+    return search_response["hits"]["hits"]
