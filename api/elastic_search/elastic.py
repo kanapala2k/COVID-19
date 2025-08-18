@@ -12,7 +12,7 @@ if es.ping():
 else:
     print("Connection failed.")
 
-def multiMatchSearch(query: str):
+def multi_match_search(query: str):
     retriever_object = {
         "standard": {
             "query": {

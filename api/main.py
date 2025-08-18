@@ -4,9 +4,10 @@ from elastic_search import elastic
 app = FastAPI()
 es = elastic.es
 
-from routers import lookup, search
+from routers import lookup, search, nodesearch
 app.include_router(lookup.router)
 app.include_router(search.router)
+app.include_router(nodesearch.router)
 
 @app.get("/")
 async def read_root():
