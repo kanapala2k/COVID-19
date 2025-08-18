@@ -8,4 +8,4 @@ router = APIRouter()
 async def lookup(query: str):
     expanded_query = query_expansion.sentence_transformer_wrapper.expanded_query(query)
     print("expanded_query", expanded_query)
-    return elastic_search.elastic.multiMatchSearch(query=expanded_query)
+    return elastic_search.elastic.multi_match_search(query=expanded_query)

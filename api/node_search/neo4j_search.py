@@ -8,10 +8,10 @@ driver.verify_connectivity()
 
 def add_strain_vaccine_relation(strain, vaccine):
     with driver.session() as session:
-        session.write_transaction(exec_add_strain_vaccine_relation, strain, vaccine)
+        session.write_transaction(__add_strain_vaccine_relation, strain, vaccine)
 
 
-def exec_add_strain_vaccine_relation(tx, strain, vaccine):
+def __add_strain_vaccine_relation(tx, strain, vaccine):
     query = """
         CREATE (a:Strain {name: $strain})
         CREATE (b:Vaccine {name: $vaccine})
@@ -20,7 +20,7 @@ def exec_add_strain_vaccine_relation(tx, strain, vaccine):
     tx.run(query, strain=strain, vaccine=vaccine)
 
 
-def find_strain_vaccine_relations_exec(tx):
+def __find_strain_vaccine_relations(tx):
     query = """
     MATCH (p:Vaccine)-[:CURES]->(s:Strain)
     RETURN p.name AS vaccine_name, s.name AS strain_name
@@ -30,7 +30,7 @@ def find_strain_vaccine_relations_exec(tx):
 
 def find_strain_vaccine_relations() :
     with driver.session() as session:
-        relation_data = session.read_transaction(find_strain_vaccine_relations_exec)
+        relation_data = session.read_transaction(__find_strain_vaccine_relations)
         print("\nStrain Vaccine relationships:")
         for data in relation_data:
             print(f"{data['vaccine']} cures {data['strain']}")
