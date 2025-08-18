@@ -7,7 +7,7 @@ def expanded_query (query:str) -> str:
     model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
     # Candidate expansion terms (can be extracted from a corpus)
-    candidate_terms = ["deep learning", "neural networks", "artificial intelligence", "data science", "supervised learning"]
+    candidate_terms = ["corona virus", "vaccine", "contagious"]
 
     # Encode query and candidate terms
     query_embedding = model.encode(query, convert_to_tensor=True)
