@@ -11,7 +11,8 @@ WORKDIR /api
 
 # Copy the requirements file and install dependencies first to leverage Docker's build cache
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN --mount=type=cache,target=/root/.cache/pip \
+    pip install -r requirements.txt
 
 # Copy the entire application code into the container
 COPY . .
