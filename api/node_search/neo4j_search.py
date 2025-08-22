@@ -1,14 +1,19 @@
 from neo4j import GraphDatabase
 
-uri = "neo4j+s://9e2ab377.databases.neo4j.io"
-username = "neo4j"
-password = "ejkuKHHXQEK9G_jBVSu8bdwlH4TyXTxsHtTswFllvHM"
-driver = GraphDatabase.driver(uri, auth=(username, password))
-driver.verify_connectivity()
+
+def __connect():
+    uri = "neo4j+s://9e2ab377.databases.neo4j.io"
+    username = "neo4j"
+    password = "ejkuKHHXQEK9G_jBVSu8bdwlH4TyXTxsHtTswFllvHM"
+    driver = GraphDatabase.driver(uri, auth=(username, password))
+    driver.verify_connectivity()
+    return driver
 
 def add_strain_vaccine_relation(strain, vaccine):
+    driver = __connect()
     with driver.session() as session:
-        session.write_transaction(__add_strain_vaccine_relation, strain, vaccine)
+        session.execute_write(__add_strain_vaccine_relation, strain, vaccine)
+        driver.close()
 
 
 def __add_strain_vaccine_relation(tx, strain, vaccine):
@@ -29,8 +34,10 @@ def __find_strain_vaccine_relations(tx):
     return [{"vaccine": record["vaccine_name"], "strain": record["strain_name"]} for record in result]
 
 def find_strain_vaccine_relations() :
+    driver = __connect()
     with driver.session() as session:
-        relation_data = session.read_transaction(__find_strain_vaccine_relations)
+        relation_data = session.execute_read(__find_strain_vaccine_relations)
+        driver.close()
         print("\nStrain Vaccine relationships:")
         for data in relation_data:
             print(f"{data['vaccine']} cures {data['strain']}")
