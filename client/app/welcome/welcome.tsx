@@ -4,14 +4,91 @@ import {
   TextField,
   Button,
   Box,
-  Grid
+  Grid,
+  Drawer,
+  Checkbox,
+  FormGroup,
+  FormControlLabel
 } from '@mui/material'
 
 export function Welcome() {
   const [search, setSearch] = useState('')
+  const [drawerOpen, setDrawerOpen] = useState(true)
 
   return (
     <>
+      {/** Start of facet search drawer */}
+      <Drawer
+        variant={'persistent'}
+        anchor={'left'}
+        open={drawerOpen}
+        sx={{
+          width: 250,
+          flexShrink: 0,
+          "& .MuiDrawer-paper": {
+            width: 250,
+            boxSizing: "border-box",
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-evenly',
+            alignItems: 'center'
+          },
+        }}
+      >
+        <Box
+          sx={{
+          }}
+        >
+          <h3>Filter by Title</h3>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox />} label={'Title A (10)'} />
+            <FormControlLabel control={<Checkbox />} label={'Title B (8)'} />
+            <FormControlLabel control={<Checkbox />} label={'Title C (15)'} />
+            <FormControlLabel control={<Checkbox />} label={'Title D (5)'} />
+          </FormGroup>
+        </Box>
+
+        <Box
+          sx={{
+          }}
+        >
+          <h3>Filter by Author</h3>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox />} label={'Author A (12)'} />
+            <FormControlLabel control={<Checkbox />} label={'Author B (7)'} />
+            <FormControlLabel control={<Checkbox />} label={'Author C (2)'} />
+            <FormControlLabel control={<Checkbox />} label={'Author D (11)'} />
+          </FormGroup>
+        </Box>
+
+        <Box
+          sx={{
+          }}
+        >
+          <h3>Filter by Source</h3>
+          <FormGroup>
+            <FormControlLabel control={<Checkbox />} label={'Source A (12)'} />
+            <FormControlLabel control={<Checkbox />} label={'Source B (7)'} />
+            <FormControlLabel control={<Checkbox />} label={'Source C (3)'} />
+            <FormControlLabel control={<Checkbox />} label={'Source D (14)'} />
+          </FormGroup>
+        </Box>
+
+        <Button
+          onClick={() => setDrawerOpen(false)}
+          variant='outlined'
+        >
+          Close
+        </Button>        
+      </Drawer>
+      {/** End of facet search drawer */}
+
+      <Button
+        onClick={() => setDrawerOpen(true)}
+        variant='outlined'
+      >
+        Open Filter
+      </Button>
       <Container
         fixed={true}
         sx={{
