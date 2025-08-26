@@ -12,20 +12,36 @@ export function Welcome() {
 
   return (
     <>
-      <Container maxWidth='xl'>
+      <Container
+        fixed={true}
+        sx={{
+          display: 'flex',
+          width: '100%',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          marginBottom: '1rem'
+        }}
+      >
         <TextField
           id='search'
           label={'Find documents'}
           variant='standard'
           onChange={event => setSearch(event.target.value)}
+          sx={{
+            width: '75%',
+          }}
         />
         <Button
           onClick={() => HandleSearch(search)}
           variant='outlined'
+          sx={{
+            width: '15%',
+            marginLeft: '1rem'
+          }}
         >
           Search
         </Button>
-        <h4 style={{ fontSize: '16px', color: 'red' }}>{search ? search : 'no search yet'}</h4>
       </Container>
       <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'blueviolet', padding: '1rem'}}>
         <Grid container spacing={2} minWidth={'100%'}>
@@ -54,12 +70,22 @@ function SearchResults({ title, abstract, summary }: SearchResultsBoxes) {
         flexDirection: 'column',
         textAlign: 'center',
         backgroundColor: 'lightgray',
-        minWidth: '100%'
+        minWidth: '100%',
+        alignItems: 'center'
       }}
     >
       <h2>{title}</h2>
       <h4>{abstract}</h4>
       <h4>{summary}</h4>
+      <Button
+        variant='outlined'
+        sx={{
+          width: '75%',
+          margin: '0.5rem'
+        }}
+      >
+        View Document
+      </Button>
     </Box>
     </Grid>
   )
