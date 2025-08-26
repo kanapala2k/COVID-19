@@ -43,7 +43,7 @@ export function Welcome() {
           Search
         </Button>
       </Container>
-      <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'blueviolet', padding: '1rem'}}>
+      <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'green', padding: '1rem'}}>
         <Grid container spacing={2} minWidth={'100%'}>
           {
             mockData.map(data => <SearchResults title={data.title} abstract={data.abstract} summary={data.Summary} />)
