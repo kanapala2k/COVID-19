@@ -2,8 +2,8 @@ from elasticsearch import Elasticsearch
 
 # Connect to Elasticsearch
 es = Elasticsearch(
-    "https://my-elasticsearch-project-dcdc60.es.us-east-1.aws.elastic.cloud:443",
-    api_key="WXY3dHBKZ0J0aFZlM1hLRWp2V206cmlmR1Q0ODlkOGNCU1BVaTBsUFpLdw=="
+    "https://my-elasticsearch-project-f98124.es.us-central1.gcp.elastic.cloud:443",
+    api_key="SW53VjNaZ0JjMDNHb0tIc0dNSTA6UElxa0s3TDhWaldIZjlTWHprVU1DUQ=="
 )
 
 # Test connection
@@ -20,14 +20,15 @@ def multi_match_search(query: str):
                     "query": query,
                     "fields": [
                         "title",
-                        "abstract"
+                        "text",
+                        "section"
                     ]
                 }
             }
         }
     }
     search_response = es.search(
-        index="covid_19",
+        index="sentences_poc",
         retriever=retriever_object
     )
     return search_response["hits"]["hits"]
