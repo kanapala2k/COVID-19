@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import {
   Container,
   TextField,
@@ -10,10 +10,25 @@ import {
   FormGroup,
   FormControlLabel
 } from '@mui/material'
+import { SearchService } from '~/services/search'
 
 export function Welcome() {
   const [search, setSearch] = useState('')
-  const [drawerOpen, setDrawerOpen] = useState(true)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+  const [searchResults, setSearchResults] = useState([])
+  const searchService = new SearchService()
+
+  // useEffect(() => {
+  //   setSearchResults(mockData)
+  // }, [])
+
+  async function HandleSearch(query: string) {
+  // call the search API
+  console.log(query)
+  const hits = await searchService.submitQuery(query)
+  setSearchResults(hits)
+  
+}
 
   return (
     <>
@@ -123,7 +138,7 @@ export function Welcome() {
       <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'green', padding: '1rem'}}>
         <Grid container spacing={2} minWidth={'100%'}>
           {
-            mockData.map(data => <SearchResults title={data.title} abstract={data.abstract} summary={data.Summary} />)
+            searchResults.map(data => <SearchResults title={data._source?.metadata?.title} abstract={data._source?.metadata?.section_name} summary={data._source?.content} key={data._source?.section_id} />)
           }
         </Grid>
       </Container>
@@ -168,61 +183,58 @@ function SearchResults({ title, abstract, summary }: SearchResultsBoxes) {
   )
 }
 
-function HandleSearch(query: string) {
-  // call the search API
-  console.log(query)
-}
 
 
-const mockData = [
-  {
-    title: 'Title 1',
-    abstract: 'Abstract 1',
-    Summary: 'Summary 1'
-  },
-    {
-    title: 'Title 2',
-    abstract: 'Abstract 2',
-    Summary: 'Summary 2'
-  },
-    {
-    title: 'Title 3',
-    abstract: 'Abstract 3',
-    Summary: 'Summary 3'
-  },
-    {
-    title: 'Title 4',
-    abstract: 'Abstract 4',
-    Summary: 'Summary 4'
-  },
-    {
-    title: 'Title 5',
-    abstract: 'Abstract 5',
-    Summary: 'Summary 5'
-  },
-    {
-    title: 'Title 6',
-    abstract: 'Abstract 6',
-    Summary: 'Summary 6'
-  },
-    {
-    title: 'Title 7',
-    abstract: 'Abstract 7',
-    Summary: 'Summary 7'
-  },
-    {
-    title: 'Title 8',
-    abstract: 'Abstract 8',
-    Summary: 'Summary 8'
-  },
-    {
-    title: 'Title 9',
-    abstract: 'Abstract 9',
-    Summary: 'Summary 9'
-  },
-     {
-    title: 'Title 10',
-    abstract: 'Abstract 10',
-    Summary: 'Summary 10'
-  },
-]
+
+// const mockData = [
+//   {
+//     title: 'Title 1',
+//     abstract: 'Abstract 1',
+//     Summary: 'Summary 1'
+//   },
+//     {
+//     title: 'Title 2',
+//     abstract: 'Abstract 2',
+//     Summary: 'Summary 2'
+//   },
+//     {
+//     title: 'Title 3',
+//     abstract: 'Abstract 3',
+//     Summary: 'Summary 3'
+//   },
+//     {
+//     title: 'Title 4',
+//     abstract: 'Abstract 4',
+//     Summary: 'Summary 4'
+//   },
+//     {
+//     title: 'Title 5',
+//     abstract: 'Abstract 5',
+//     Summary: 'Summary 5'
+//   },
+//     {
+//     title: 'Title 6',
+//     abstract: 'Abstract 6',
+//     Summary: 'Summary 6'
+//   },
+//     {
+//     title: 'Title 7',
+//     abstract: 'Abstract 7',
+//     Summary: 'Summary 7'
+//   },
+//     {
+//     title: 'Title 8',
+//     abstract: 'Abstract 8',
+//     Summary: 'Summary 8'
+//   },
+//     {
+//     title: 'Title 9',
+//     abstract: 'Abstract 9',
+//     Summary: 'Summary 9'
+//   },
+//      {
+//     title: 'Title 10',
+//     abstract: 'Abstract 10',
+//     Summary: 'Summary 10'
+//   },
+// ]
