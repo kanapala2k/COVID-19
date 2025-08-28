@@ -21,7 +21,7 @@ def es_search(query: str):
                     "num_candidates": 100,
                     "query_vector_builder": {
                         "text_embedding": {
-                            "model_id": "",
+                            "model_id": "sentence-transformers__all-minilm-l6-v2",
                             "model_text": query
                         }
                     }
