@@ -3,11 +3,11 @@ from sympy.printing.pytorch import torch
 
 
 def expanded_query (query:str) -> str:
-    # Load a pre-trained Sentence Transformer model
-    model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
+    # Load a pre-trained Sentence Transformer model for general purpose
+    model = SentenceTransformer('all-MiniLM-L6-v2')
 
     # Candidate expansion terms (can be extracted from a corpus)
-    candidate_terms = ["corona virus", "vaccine", "contagious"]
+    candidate_terms = ["disease", "drug", "protein", "gene", "symptom", "treatment", "medication", "condition",  "therapy","organism","chemical","cell_type","person","location"]
 
     # Encode query and candidate terms
     query_embedding = model.encode(query, convert_to_tensor=True)

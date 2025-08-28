@@ -10,7 +10,7 @@ async def lookup(query: str):
     print("expanded_query", expanded_query)
     return elastic_search.elastic.multiMatchSearch(query=expanded_query)
 
-@router.put("/search/{str}")
+@router.post("/search/{str}")
 async def lookup(query: str):
     expanded_query = query_expansion.sentence_transformer_wrapper.expanded_query(query)
     print("expanded_query", expanded_query)
