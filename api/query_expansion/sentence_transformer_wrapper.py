@@ -26,3 +26,8 @@ def expanded_query (query:str) -> str:
     print(f"Expanded Terms: {expanded_terms}")
     print(f"Expanded Query: {query} {' '.join(expanded_terms)}")
     return query.join(expanded_terms)
+
+def query_vector (query_text:str):
+    model = SentenceTransformer('all-MiniLM-L6-v2')
+    query_vector = model.encode(query_text).tolist()
+    return query_vector
