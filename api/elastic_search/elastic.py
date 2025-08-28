@@ -12,17 +12,19 @@ if es.ping():
 else:
     print("Connection failed.")
 
-def multi_match_search(query: str):
+def es_search(query: str):
     retriever_object = {
         "standard": {
             "query": {
-                "multi_match": {
-                    "query": query,
-                    "fields": [
-                        "title",
-                        "text",
-                        "section"
-                    ]
+                "knn": {
+                    "field": "embedding",
+                    "num_candidates": 100,
+                    "query_vector_builder": {
+                        "text_embedding": {
+                            "model_id": "sentence-transformers__all-minilm-l6-v2",
+                            "model_text": query
+                        }
+                    }
                 }
             }
         }
