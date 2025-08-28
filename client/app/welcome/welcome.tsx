@@ -11,6 +11,7 @@ import {
   FormControlLabel
 } from '@mui/material'
 import { SearchService } from '~/services/search'
+import SearchResultCard from '~/components/searchResultCard'
 
 export function Welcome() {
   const [search, setSearch] = useState('')
@@ -135,10 +136,10 @@ export function Welcome() {
           Search
         </Button>
       </Container>
-      <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'green', padding: '1rem'}}>
+      <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: '#BBB791', padding: '1rem'}}>
         <Grid container spacing={2} minWidth={'100%'}>
           {
-            searchResults.map(data => <SearchResults title={data._source?.metadata?.title} abstract={data._source?.metadata?.section_name} summary={data._source?.content} key={data._source?.section_id} />)
+            searchResults.map(data => <SearchResultCard title={data._source?.metadata?.title} abstract={data._source?.metadata?.section_name} summary={data._source?.content} score={data._score} key={data._source?.section_id} />)
           }
         </Grid>
       </Container>
@@ -146,95 +147,39 @@ export function Welcome() {
   );
 }
 
-type SearchResultsBoxes = {
-  title: string;
-  abstract: string;
-  summary: string;
-}
+// type SearchResultsBoxes = {
+//   title: string;
+//   abstract: string;
+//   summary: string;
+// }
 
-function SearchResults({ title, abstract, summary }: SearchResultsBoxes) {
-  return (
-    <Grid size={{xs: 12, md: 6, lg: 4}}>
-    <Box
-      component={'section'}
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'center',
-        backgroundColor: 'lightgray',
-        minWidth: '100%',
-        alignItems: 'center'
-      }}
-    >
-      <h2>{title}</h2>
-      <h4>{abstract}</h4>
-      <h4>{summary}</h4>
-      <Button
-        variant='outlined'
-        sx={{
-          width: '75%',
-          margin: '0.5rem'
-        }}
-      >
-        View Document
-      </Button>
-    </Box>
-    </Grid>
-  )
-}
-
-
-
-
-// const mockData = [
-//   {
-//     title: 'Title 1',
-//     abstract: 'Abstract 1',
-//     Summary: 'Summary 1'
-//   },
-//     {
-//     title: 'Title 2',
-//     abstract: 'Abstract 2',
-//     Summary: 'Summary 2'
-//   },
-//     {
-//     title: 'Title 3',
-//     abstract: 'Abstract 3',
-//     Summary: 'Summary 3'
-//   },
-//     {
-//     title: 'Title 4',
-//     abstract: 'Abstract 4',
-//     Summary: 'Summary 4'
-//   },
-//     {
-//     title: 'Title 5',
-//     abstract: 'Abstract 5',
-//     Summary: 'Summary 5'
-//   },
-//     {
-//     title: 'Title 6',
-//     abstract: 'Abstract 6',
-//     Summary: 'Summary 6'
-//   },
-//     {
-//     title: 'Title 7',
-//     abstract: 'Abstract 7',
-//     Summary: 'Summary 7'
-//   },
-//     {
-//     title: 'Title 8',
-//     abstract: 'Abstract 8',
-//     Summary: 'Summary 8'
-//   },
-//     {
-//     title: 'Title 9',
-//     abstract: 'Abstract 9',
-//     Summary: 'Summary 9'
-//   },
-//      {
-//     title: 'Title 10',
-//     abstract: 'Abstract 10',
-//     Summary: 'Summary 10'
-//   },
-// ]
+// function SearchResults({ title, abstract, summary }: SearchResultsBoxes) {
+//   return (
+//     <Grid size={{xs: 12, md: 6, lg: 4}}>
+//     <Box
+//       component={'section'}
+//       sx={{
+//         display: 'flex',
+//         flexDirection: 'column',
+//         textAlign: 'center',
+//         backgroundColor: 'lightgray',
+//         minWidth: '100%',
+//         alignItems: 'center'
+//       }}
+//     >
+//       <h2>{title}</h2>
+//       <h4>{abstract}</h4>
+//       <h4>{summary}</h4>
+//       <Button
+//         variant='outlined'
+//         sx={{
+//           width: '75%',
+//           margin: '0.5rem'
+//         }}
+//       >
+//         View Document
+//       </Button>
+//     </Box>
+//     </Grid>
+//   )
+// }
