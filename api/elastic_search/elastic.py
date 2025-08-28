@@ -28,7 +28,7 @@ def multi_match_search(query: str):
         }
     }
     search_response = es.search(
-        index="sentences_poc",
+        index="documents",
         retriever=retriever_object
     )
     return search_response["hits"]["hits"]
