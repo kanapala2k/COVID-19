@@ -138,7 +138,7 @@ export function Welcome() {
       <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'green', padding: '1rem'}}>
         <Grid container spacing={2} minWidth={'100%'}>
           {
-            searchResults.map(data => <SearchResults title={data.title} abstract={data.text} summary={data.section} key={data.sourceId} />)
+            searchResults.map(data => <SearchResults title={data._source?.metadata?.title} abstract={data._source?.metadata?.section_name} summary={data._source?.content} key={data._source?.section_id} />)
           }
         </Grid>
       </Container>

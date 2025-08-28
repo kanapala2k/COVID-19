@@ -28,7 +28,6 @@ export class BaseService {
 
   _fetchRaw (uri: string, params: object = {}, method: string = 'GET') {
     let actualUri = this._dataServiceUriFor(uri)
-    console.log(method)
     const request = {
       method,
       headers: {
@@ -52,6 +51,6 @@ export class BaseService {
         actualUri += `?${new URLSearchParams(params)}`
       }
 
-    return fetch(actualUri, request)
+    return axios(actualUri, request)
   }
 }
