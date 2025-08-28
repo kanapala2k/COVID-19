@@ -12,6 +12,7 @@ if es.ping():
 else:
     print("Connection failed.")
 
+
 def es_search(query: str):
     retriever_object = {
         "standard": {
@@ -32,5 +33,18 @@ def es_search(query: str):
     search_response = es.search(
         index="documents",
         retriever=retriever_object
+    )
+    return search_response["hits"]["hits"]
+
+
+def es_search_by_vector(query_vector):
+    search_response = es.search(
+        index="documents",
+        knn = {
+                "field": "embedding",
+                "query_vector": query_vector,
+                "k": 5,
+                "num_candidates": 20
+        }
     )
     return search_response["hits"]["hits"]
