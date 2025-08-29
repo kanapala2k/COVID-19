@@ -11,6 +11,8 @@ import {
   FormControlLabel
 } from '@mui/material'
 import { SearchService } from '~/services/search'
+import { Link } from 'react-router'
+import { BasicNvlWrapper } from '@neo4j-nvl/react'
 
 export function Welcome() {
   const [search, setSearch] = useState('')
@@ -23,12 +25,11 @@ export function Welcome() {
   // }, [])
 
   async function HandleSearch(query: string) {
-  // call the search API
-  console.log(query)
-  const hits = await searchService.submitQuery(query)
-  setSearchResults(hits)
-  
-}
+    // call the search API
+    console.log(query)
+    const hits = await searchService.submitQuery(query)
+    setSearchResults(hits)
+  }
 
   return (
     <>
@@ -121,7 +122,7 @@ export function Welcome() {
           variant='standard'
           onChange={event => setSearch(event.target.value)}
           sx={{
-            width: '75%',
+            width: '60%',
           }}
         />
         <Button
@@ -129,10 +130,19 @@ export function Welcome() {
           variant='outlined'
           sx={{
             width: '15%',
-            marginLeft: '1rem'
           }}
         >
           Search
+        </Button>
+        <Button
+          component={Link} 
+          to="/grid"
+          variant='outlined'
+          sx={{
+            width: '15%'
+          }}
+        >
+          Grid View
         </Button>
       </Container>
       <Container maxWidth='xl' style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-evenly', flexWrap: 'wrap', backgroundColor: 'green', padding: '1rem'}}>
@@ -141,6 +151,17 @@ export function Welcome() {
             searchResults.map(data => <SearchResults title={data._source?.metadata?.title} abstract={data._source?.metadata?.section_name} summary={data._source?.content} key={data._source?.section_id} />)
           }
         </Grid>
+      </Container>
+
+      <Container
+        fixed={true}
+        sx={{
+          width: '100%',
+          height: '100%',
+          backgroundColor: 'orangered'
+        }}
+      >
+        <BasicNvlWrapper nodes={searchResults} rels={[{ from: '0', to: '1', id: '10' }]} />
       </Container>
     </>
   );

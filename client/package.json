@@ -12,6 +12,8 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/material": "^7.3.1",
+    "@neo4j-nvl/base": "^0.3.9",
+    "@neo4j-nvl/react": "^0.3.9",
     "@react-router/node": "^7.7.1",
     "@react-router/serve": "^7.7.1",
     "axios": "^1.11.0",
