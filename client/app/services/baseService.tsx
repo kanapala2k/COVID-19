@@ -31,7 +31,7 @@ export class BaseService {
     const request = {
       method,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Cache-Control': 'no-cache',
         Pragma: 'no-cache',
         Expires: 0,
