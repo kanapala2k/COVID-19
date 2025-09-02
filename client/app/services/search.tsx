@@ -11,10 +11,8 @@ export class SearchService extends BaseService {
             const params = {
                 query: semantic
             }
-            const res = await this._fetchRaw(`search/`, params, )
-            console.log(res.data)
+            const res = await this._fetchRaw(`search/`, params, 'POST')
             return res.data
         }
-        return mockData
     }
 }
